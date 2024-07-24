@@ -82,6 +82,15 @@ if st.sidebar.button('Entrenar Modelo'):
     # Evaluar el modelo
     loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
     st.sidebar.write(f'Precisión del modelo: {accuracy:.2f}')
+    
+    # Gráfico de pérdida
+    fig, ax = plt.subplots()
+    ax.plot(history.history['loss'], label='train')
+    ax.plot(history.history['val_loss'], label='validation')
+    ax.set_xlabel('Epoch')
+    ax.set_ylabel('Loss')
+    ax.legend()
+    st.pyplot(fig)
 
 # Formulario para predicción
 st.header('Ingrese los datos para la predicción:')
@@ -120,3 +129,21 @@ if st.button('Predecir'):
     # Mostrar los datos de entrada para verificación
     st.write("Datos de entrada:", input_data)
     st.write("Datos escalados:", input_scaled)
+
+# Visualizaciones adicionales
+st.header('Visualizaciones')
+
+# Distribución de edades
+fig, ax = plt.subplots()
+sns.histplot(data=ingresos, x='Age', kde=True, ax=ax)
+st.pyplot(fig)
+
+# Distribución de ingresos por género
+fig, ax = plt.subplots()
+sns.countplot(data=ingresos, x='Income', hue='Sex', ax=ax)
+st.pyplot(fig)
+
+# Matriz de correlación
+fig, ax = plt.subplots(figsize=(10, 8))
+sns.heatmap(ingresos.corr(), annot=True, cmap='coolwarm', ax=ax)
+st.pyplot(fig)

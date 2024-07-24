@@ -120,21 +120,3 @@ if st.button('Predecir'):
     # Mostrar los datos de entrada para verificación
     st.write("Datos de entrada:", input_data)
     st.write("Datos escalados:", input_scaled)
-
-# Visualizaciones adicionales
-st.header('Visualizaciones')
-
-# Distribución de edades
-fig, ax = plt.subplots()
-sns.histplot(data=ingresos, x='Age', kde=True, ax=ax)
-st.pyplot(fig)
-
-# Distribución de ingresos por género
-fig, ax = plt.subplots()
-sns.countplot(data=ingresos, x='Income', hue='Sex', ax=ax)
-st.pyplot(fig)
-
-# Matriz de correlación
-fig, ax = plt.subplots(figsize=(10, 8))
-sns.heatmap(ingresos.corr(), annot=True, cmap='coolwarm', ax=ax)
-st.pyplot(fig)
